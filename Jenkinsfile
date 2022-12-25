@@ -7,12 +7,13 @@ node {
         checkout scm
     }
 
-    stage('Build image') {
-        /* This builds the actual image */
-         sh 'mvn install'
-
-       app = docker.build("springboot-rest-api-demo:${env.BUILD_NUMBER}")
-    }
+    stage('Build docker image'){
+               steps{
+                   script{
+                       sh 'docker build -t sandeep/springboot-rest-api-demo .'
+                   }
+               }
+           }
 
     stage('Test image') {
 
