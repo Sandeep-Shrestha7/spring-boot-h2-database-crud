@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-       app = docker.build("sandeepshr/springboot-rest-api-demo:${env.BUILD_NUMBER}")
+        bat "docker build -t springboot-rest-api-demo:${env.BUILD_NUMBER} ."
     }
 
     stage('Test image') {
