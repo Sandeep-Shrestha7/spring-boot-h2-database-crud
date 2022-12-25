@@ -9,6 +9,7 @@ node {
 
     stage('Build image') {
         /* This builds the actual image */
+         sh 'mvn install'
 
        app = docker.build("springboot-rest-api-demo:${env.BUILD_NUMBER}")
     }
