@@ -7,13 +7,11 @@ node {
         checkout scm
     }
 
-    stage('Build docker image'){
-               steps{
-                   script{
-                       sh 'docker build -t sandeep/springboot-rest-api-demo .'
-                   }
-               }
-           }
+    stage('Build image') {
+        /* This builds the actual image */
+
+       app = docker.build("https://turotaildemocr.azurecr.io:${env.BUILD_NUMBER}")
+    }
 
     stage('Test image') {
 
