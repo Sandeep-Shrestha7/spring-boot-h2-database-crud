@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-       app = docker.build('/data/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar')
+       app = docker.build('data/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar')
     }
 
     stage('Test image') {
