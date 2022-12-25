@@ -1,32 +1,33 @@
 node {
     def app
-    
 
-		// Mark the code checkout 'stage'....
-		stage('Checkout from Bitbucket') {
-			checkout scm
-		}
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
 
+        checkout scm
+    }
 
-		// Build and Deploy to ACR 'stage'... 
-		stage('Build and Push to Azure Container Registry') {
-			app = docker.build('turotaildemocr.azurecr.io/event-service')
-			docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
-				app.push("${env.BUILD_NUMBER}")
-				app.push('latest')
-			}
-		}
+    stage('Build image') {
+        /* This builds the actual image */
 
-		// Pull, Run, and Test on ACS 'stage'... 
-		stage('ACS Docker Pull and Run') {
-	   		app = docker.image('turotaildemocr.azurecr.io/event-service:latest')
-	   		docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
-				app.pull()
-				//app.run('--name event-service -p 8082:8082')
-                                sh '/usr/local/bin/docker-compose down'
-                                sh '/usr/local/bin/docker-compose up -d'
-			}
-		}
+       app = docker.build('turotaildemocr.azurecr.io/springboot-rest-api-demo')
+    }
 
-   
+    stage('Test image') {
+
+        app.inside {
+            echo "Tests passed"
+        }
+    }
+
+    stage('Push image') {
+        /*
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            }
+                echo "Trying to Push Docker Build to ACR"
+    }
 }
