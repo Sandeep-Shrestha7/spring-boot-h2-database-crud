@@ -1,21 +1,7 @@
-FROM openjdk:11-slim-buster as build
+FROM openjdk:11
 
-WORKDIR /home/event-service
-#COPY maven/ ./
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
+COPY target/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar app.jar
 
-RUN ./mvnw install -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+EXPOSE 8090
 
-FROM openjdk:11-slim-buster
-
-VOLUME /tmp
-ARG DEPENDENCY=/home/event-service/target/dependency
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.bezkoder.spring.jpa.h2.SpringBootJpaH2Application"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
