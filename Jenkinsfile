@@ -10,7 +10,7 @@ node {
     stage('Build image') {
         /* This builds the actual image */
 
-       app = docker.build('turotaildemocr.azurecr.io/springboot-rest-api-demo')
+       app = docker.build('release/springboot-rest-api-demo')
     }
 
     stage('Test image') {
