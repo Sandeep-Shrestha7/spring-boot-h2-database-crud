@@ -14,7 +14,7 @@ node {
                 //branch: 'main'
          }
           stage('Build docker') {
-                 dockerImage = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
+                 app = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
           }
 
           stage('Deploy docker'){
