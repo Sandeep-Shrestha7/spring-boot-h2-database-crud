@@ -20,8 +20,8 @@ node {
           stage('Deploy docker'){
           echo "Docker Image Tag Name: ${dockerImageTag}"
            docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
-                      dockerImage.push("{env.BUILD_NUMBER}")
-                      dockerImage.push("latest")
+                      dockerImage.push("$env.BUILD_NUMBER")
+                      dockerImage.push('latest')
                       }
           }
     }catch(e){
