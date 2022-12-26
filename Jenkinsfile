@@ -16,9 +16,11 @@ node {
           }
 
           stage('Deploy docker'){
-                  echo "Docker Image Tag Name: ${dockerImageTag}"
-                  sh "docker stop springboot-deploy || true && docker rm springboot-deploy || true"
-                  sh "docker run --name springboot-deploy -d -p 8081:8081 springboot-deploy:${env.BUILD_NUMBER}"
+
+           docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
+                      app.push("springboot-deploy:${env.BUILD_NUMBER}")
+                      app.push("latest")
+                      }
           }
     }catch(e){
 //         currentBuild.result = "FAILED"
