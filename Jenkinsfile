@@ -1,5 +1,5 @@
 node {
-    //def WORKSPACE = "/var/lib/jenkins/workspace/springboot-deploy"
+    def WORKSPACE = "/var/lib/jenkins/workspace/springboot-deploy"
     def dockerImageTag = "springboot-deploy${env.BUILD_NUMBER}"
 
     try{
@@ -7,7 +7,7 @@ node {
          stage('Clone Repo') {
             // for display purposes
             // Get some code from a GitHub repository
-            git url: 'https://github.com/Sandeep-Shrestha7/spring-boot-h2-database-crud.git',
+            git url: 'https://github.com/Sandeep-Shrestha7/spring-boot-h2-database-crud.git'
                 //credentialsId: 'springdeploy-user',
                 //branch: 'main'
          }
