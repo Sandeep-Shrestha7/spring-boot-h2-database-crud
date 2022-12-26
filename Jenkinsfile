@@ -14,14 +14,14 @@ node {
                 //branch: 'main'
          }
           stage('Build docker') {
-                 app = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
+                 dockerImage = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
           }
 
           stage('Deploy docker'){
-
+          echo "Docker Image Tag Name: ${dockerImageTag}"
            docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
-                      app.push("springboot-deploy:${env.BUILD_NUMBER}")
-                      app.push("latest")
+                      dockerImage.push("springboot-deploy:${env.BUILD_NUMBER}")
+                      dockerImage.push("latest")
                       }
           }
     }catch(e){
