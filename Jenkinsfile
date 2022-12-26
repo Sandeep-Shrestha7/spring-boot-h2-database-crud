@@ -20,7 +20,7 @@ node {
           stage('Deploy docker'){
           echo "Docker Image Tag Name: ${dockerImageTag}"
            docker.withRegistry('https://turotaildemocr.azurecr.io', 'azure_acr_credential') {
-                      dockerImage.push("springboot-deploy:${env.BUILD_NUMBER}")
+                      dockerImage.push("${dockerImageTag")
                       dockerImage.push("latest")
                       }
           }
