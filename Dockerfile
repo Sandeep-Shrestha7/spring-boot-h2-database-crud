@@ -15,7 +15,7 @@ RUN mvn package
 FROM openjdk
 
 #expose port 809
-EXPOSE 8090
+#EXPOSE 8090
 
 #default command
 CMD java -jar /data/spring-boot-jpa-h2-0.0.1-SNAPSHOT.jar
