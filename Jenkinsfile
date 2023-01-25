@@ -19,9 +19,8 @@ node {
 
           stage('Deploy docker'){
           echo "Docker Image Tag Name: ${dockerImageTag}"
-           docker.withRegistry('https://public.ecr.aws/v0i8s2l5/tutorial-demo', 'aws-credential') {
+           docker.withRegistry('https://public.ecr.aws/v0i8s2l5/tutorial-demo', 'ecr:us-east-1:aws-credential') {
                       dockerImage.push("$env.BUILD_NUMBER")
-                      //dockerImage.push('latest')
                       }
           }
     }catch(e){
