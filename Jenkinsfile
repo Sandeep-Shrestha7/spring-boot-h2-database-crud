@@ -7,7 +7,7 @@ node {
         docker.withRegistry('public.ecr.aws/v0i8s2l5/tutorial-demo', 'ecr:us-east-1:aws-credential') {
 
             //build image
-            def customImage = docker.build("my-image:${env.BUILD_ID}")
+            def customImage = docker.build("tutorial-demo:${env.BUILD_ID}")
 
             //push image
             customImage.push()
