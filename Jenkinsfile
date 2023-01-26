@@ -21,7 +21,7 @@ node {
           echo "Docker Image Tag Name: ${dockerImageTag}"
           sh 'rm  ~/.dockercfg || true'
                  sh 'rm ~/.docker/config.json || true'
-           docker.withRegistry('https://public.ecr.aws/v0i8s2l5/tutorial-demo', 'ecr:us-east-1:aws-credential1') {
+           docker.withRegistry('https://public.ecr.aws/v0i8s2l5/tutorial-demo', 'ecr:us-east-1:aws-credential') {
                       dockerImage.push("$env.BUILD_NUMBER")
                       }
           }
