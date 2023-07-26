@@ -22,6 +22,7 @@ node {
           sh 'rm  ~/.dockercfg || true'
                  sh 'rm ~/.docker/config.json || true'
 
+        docker login -
           sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0i8s2l5'
           sh 'docker tag tutorial-demo:latest public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           sh 'docker push public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
