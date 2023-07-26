@@ -19,7 +19,7 @@ node {
           stage('Deploy docker'){
           echo "hello"
 
-          sh 'docker tag springboot-deploy:latest public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
+          sh 'docker tag springboot-deploy:${dockerImageTag} public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           sh 'docker push public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           }
     }catch(e){
