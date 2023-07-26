@@ -17,6 +17,7 @@ node {
           }
 
           stage('Deploy docker'){
+          echo "hello"
 
         docker login -
           sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0i8s2l5'
