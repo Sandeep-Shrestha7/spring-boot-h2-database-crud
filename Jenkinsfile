@@ -17,7 +17,7 @@ node {
           }
 
           stage('Deploy docker'){
-          echo "hello"
+          echo "springboot-deploy ${env.BUILD_NUMBER}"
           echo "dockerImageTag"
 
           sh 'docker tag springboot-deploy:dockerImageTag public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
