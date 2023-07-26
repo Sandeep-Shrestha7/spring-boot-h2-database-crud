@@ -20,7 +20,7 @@ node {
           echo "springboot-deploy ${env.BUILD_NUMBER}"
           echo "dockerImageTag"
 
-          sh 'docker tag springboot-deploy ${env.BUILD_NUMBER} public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
+          sh 'docker tag springboot-deploy:11 public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           sh 'docker push public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           }
     }catch(e){
