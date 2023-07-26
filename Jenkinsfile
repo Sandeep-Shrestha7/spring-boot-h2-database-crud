@@ -1,7 +1,7 @@
 node {
     def app
     def WORKSPACE = "/var/lib/jenkins/workspace/springboot-deploy"
-    def dockerImageTag = "springboot-deploy${env.BUILD_NUMBER}"
+    def dockerImageTag = "springboot-deploy ${env.BUILD_NUMBER}"
 
     try{
 //          notifyBuild('STARTED')
@@ -18,8 +18,7 @@ node {
 
           stage('Deploy docker'){
          // echo "Docker Image Tag Name: ${dockerImageTag}"
-          sh 'rm  ~/.dockercfg || true'
-                 sh 'rm ~/.docker/config.json || true'
+          sh 'rm  -f ~/.dockercfg ~/.docker/config.json || true'
 
         docker login -
           sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0i8s2l5'
