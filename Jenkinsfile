@@ -19,14 +19,8 @@ node {
           stage('Deploy docker'){
           echo "hello"
 
-        docker login -
-          sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0i8s2l5'
           sh 'docker tag tutorial-demo:latest public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           sh 'docker push public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
-
-          /*  docker.withRegistry('https://public.ecr.aws/v0i8s2l5/tutorial-demo', 'ecr:us-east-1:aws-credential') {
-                      dockerImage.push("$env.BUILD_NUMBER")
-                      } */
           }
     }catch(e){
 //         currentBuild.result = "FAILED"
