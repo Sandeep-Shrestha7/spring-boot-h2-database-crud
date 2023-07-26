@@ -2,7 +2,7 @@ node {
 
     def app
     def WORKSPACE = "/var/lib/jenkins/workspace/springboot-deploy"
-    def dockerImageTag = "springboot-deploy${env.BUILD_NUMBER}"
+    def dockerImageTag = "springboot-deploy\${env.BUILD_NUMBER}"
 
     try{
 //          notifyBuild('STARTED')
@@ -14,11 +14,11 @@ node {
                 //branch: 'main'
          }
           stage('Build docker') {
-                 dockerImage = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
+                 dockerImage = docker.build("springboot-deploy:\${env.BUILD_NUMBER}")
           }
 
           stage('Deploy docker'){
-          echo "Docker Image Tag Name: ${dockerImageTag}"
+          echo "Docker Image Tag Name: \${dockerImageTag}"
           sh 'rm  ~/.dockercfg || true'
                  sh 'rm ~/.docker/config.json || true'
 
