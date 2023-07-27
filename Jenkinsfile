@@ -18,14 +18,9 @@ node {
 
           stage('Deploy docker'){
 
-          docker.withRegistry('https://999944884420.signin.aws.amazon.com', 'ecr:us-east-1:aws_cred') {
-                                sh "docker push 999944884420.signin.aws.amazon.com/tutorial-demo:latest"
-
+          sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0i8s2l5/tutorial-demo'
+                          sh 'docker push public.ecr.aws/v0i8s2l5/tutorial-demo:latest'
           }
-          }
-
-
-
     }catch(e){
 //         currentBuild.result = "FAILED"
         throw e
