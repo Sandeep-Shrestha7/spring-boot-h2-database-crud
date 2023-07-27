@@ -22,6 +22,7 @@ node {
                                 sh "docker push 999944884420.signin.aws.amazon.com/tutorial-demo:latest"
 
           }
+          }
 
 
 
